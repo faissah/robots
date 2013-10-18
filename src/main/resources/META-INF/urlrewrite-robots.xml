@@ -5,8 +5,8 @@
 
     <!-- Inbound rules -->
     <rule>
-        <from>^/robots.txt$</from>
         <condition type="attribute" name="jahiaSiteKeyForCurrentServerName" operator="notequal">^$</condition>
+        <from>^/robots.txt$</from>
         <to last="true">/cms/render/live/%{attribute:siteDefaultLanguage}/sites/%{attribute:jahiaSiteKeyForCurrentServerName}/home.robots.txt</to>
     </rule>
 

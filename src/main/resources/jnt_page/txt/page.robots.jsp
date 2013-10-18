@@ -6,5 +6,5 @@
 
 <c:set var="siteNode" value="${renderContext.mainResource.node.resolveSite}"/>
 <c:if test="${jcr:isNodeType(siteNode, 'jmix:robots')}">
-${siteNode.properties.robots.string}
+    ${siteNode.properties.robots.string}
 </c:if>

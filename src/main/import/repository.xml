@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<content xmlns:j="http://www.jahia.org/jahia/1.0"
-         xmlns:jcr="http://www.jcp.org/jcr/1.0"
-         xmlns:jnt="http://www.jahia.org/jahia/nt/1.0">
+<content xmlns:j="http://www.jahia.org/jahia/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0">
     <modules jcr:primaryType="jnt:modules">
-        <robots j:dependencies="default"
-                j:installedModules="siteSettings"
-                j:moduleType="module"
+        <robots j:dependencies="default siteSettings"
+                j:installedModules="robots"
+                j:moduleType="system"
                 j:title="Jahia robots.txt manager"
                 jcr:primaryType="jnt:module">
             <portlets jcr:primaryType="jnt:portletFolder"/>
             <files jcr:primaryType="jnt:folder"/>
             <contents jcr:primaryType="jnt:contentFolder"/>
             <templates j:rootTemplatePath="/" jcr:primaryType="jnt:templatesFolder">
+                <files jcr:primaryType="jnt:folder"/>
                 <contents jcr:primaryType="jnt:contentFolder"/>
                 <siteSettingsBase j:view="siteSettings"
                                   jcr:mixinTypes="jmix:useUILocale"
@@ -21,16 +20,15 @@
                                   j:hiddenTemplate="true"
                                   j:priority="100"
                                   j:requiredPermissionNames="siteAdminTemplates"
-                                  j:titleKey="robots.label.manageModules"
+                                  j:titleKey="robots.label.manageRobots"
                                   jcr:mixinTypes="jmix:rbTitle"
                                   jcr:primaryType="jnt:contentTemplate">
                         <pagecontent jcr:primaryType="jnt:contentList">
-                            <manage-modules jcr:primaryType="jnt:siteSettingsManageRobots"/>
+                            <manage-robots jcr:primaryType="jnt:siteSettingsManageRobots"/>
                         </pagecontent>
                     </manageRobots>
                 </siteSettingsBase>
             </templates>
         </robots>
     </modules>
-
 </content>

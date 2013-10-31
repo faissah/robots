@@ -10,7 +10,7 @@
     <artifactId>robots</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
-    <name>Module to manage robots.txt for your sites</name>
+    <name>Robots.txt manager module</name>
     <description>A module to configure how search engines index sites via robots.txt</description>
     <scm>
         <connection>scm:git:git@github.com:metacosm/robots.git</connection>

@@ -14,12 +14,7 @@
     <script type="text/javascript">
         function updateSiteRobots(btn) {
             btn.attr('disabled', 'disabled');
-            var data = {
-                'robots': $('#robotsString').textContent
-            };
             $('#updateSiteRobotsForm').ajaxSubmit({
-                data: data,
-                dataType: "json",
                 success: function (response) {
                     if (response.warn != undefined) {
                         alert(response.warn);
@@ -49,7 +44,7 @@
         <label class="control-label" for="robotsString"><fmt:message key='robots.label.robotsString'/></label>
 
         <div class="controls">
-            <textarea id="robotsString" rows="7"><c:if test="${jcr:isNodeType(site, 'jmix:robots')}">${site.properties.robots.string}</c:if></textarea>
+            <textarea id="robotsString" name="robots" rows="7"><c:if test="${jcr:isNodeType(site, 'jmix:robots')}">${site.properties.robots.string}</c:if></textarea>
         </div>
     </div>
     <div class="control-group">

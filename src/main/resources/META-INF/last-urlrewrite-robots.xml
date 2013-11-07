@@ -6,9 +6,8 @@
     <rule>
         <name>Robots</name>
         <note>Redirects requests to robots.txt to the appropriate generated version for each site. Don't process any subsequent rules if we match.</note>
-        <condition type="attribute" name="jahiaSiteKeyForCurrentServerName" operator="notequal">^$</condition>
-        <from>^/robots.txt$</from>
-        <to last="true">/cms/render/live/%{attribute:siteDefaultLanguage}/sites/%{attribute:jahiaSiteKeyForCurrentServerName}/home.robots.txt</to>
+        <from>/robots.txt$</from>
+        <to last="true">/cms/robots</to>
     </rule>
 
 </urlrewrite>

@@ -4,6 +4,6 @@
 
 [jmix:robots] mixin
  extends=jnt:virtualsite
-- robots (string, textarea) = "User-agent: *" i18n
+- robots (string, textarea) = 'User-agent: *'
 
 [jnt:siteSettingsManageRobots] > jnt:content, mix:title, jmix:studioOnly, jmix:siteComponent

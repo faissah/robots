@@ -12,22 +12,27 @@
 <template:addResources type="javascript" resources="jquery.min.js,jquery.form.min.js"/>
 <template:addResources>
     <script type="text/javascript">
-        function updateSiteRobots(btn) {
-            btn.attr('disabled', 'disabled');
-            $('#updateSiteRobotsForm').ajaxSubmit({
-                success: function (response) {
-                    if (response.warn != undefined) {
-                        alert(response.warn);
-                    } else {
-                        alert('${i18nSaved}');
+        $(document).ready(function () {
+            $('#updateSiteRobotsForm').submit(function () {
+                var updateSiteRobotsSubmit = $('#updateSiteRobotsSubmit');
+                updateSiteRobotsSubmit.attr('disabled', 'disabled');
+                $(this).ajaxSubmit({
+                    success: function (response) {
+                        if (response.warn != undefined) {
+                            alert(response.warn);
+                        } else {
+                            alert('${i18nSaved}');
+                        }
+                        updateSiteRobotsSubmit.removeAttr('disabled');
+                    },
+                    error: function () {
+                        updateSiteRobotsSubmit.removeAttr('disabled');
                     }
-                    btn.removeAttr('disabled');
-                },
-                error: function () {
-                    btn.removeAttr('disabled');
-                }
+                });
+                // always return false to prevent standard browser submit and page navigation
+                return false;
             });
-        }
+        });
     </script>
 </template:addResources>
 
@@ -49,7 +54,7 @@
     </div>
     <div class="control-group">
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary" name="save" onclick="updateSiteRobots($(this)); return false;"><i class="icon-ok icon-white"></i><fmt:message key="robots.label.save"/></button>
+            <button type="submit" class="btn btn-primary" name="save" id="updateSiteRobotsSubmit"><i class="icon-ok icon-white"></i><fmt:message key="robots.label.save"/></button>
         </div>
     </div>
 </form>

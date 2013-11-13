@@ -10,18 +10,21 @@ preprending each site's path from the server's root so that robots can properly 
 Let's assume that we have 2 sites, `mySite` and `mySite2`.
 
 If `mySite`'s robots configuration is:
+    
     User-agent: *
     Disallow: /foo
     Disallow: /bar
 
 and `mySite2`'s robots configuration is:
+    
     User-agent: foo
     Disallow: /baz
 
 then the resulting `robots.txt` would be:
+    
     User-agent: *
     Disallow: /sites/mySite/foo
     Disallow: /sites/mySite/bar
-
+    
     User-agent: foo
     Disallow: /sites/mySite2/baz

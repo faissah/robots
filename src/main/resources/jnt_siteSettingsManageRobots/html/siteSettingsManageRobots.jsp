@@ -6,17 +6,27 @@
 <%@ taglib prefix="functions" uri="http://www.jahia.org/tags/functions" %>
 
 <c:set var="site" value="${renderContext.mainResource.node.resolveSite}"/>
+<c:url var="siteURL" value='${url.base}${site.path}'/>
 <fmt:message key="robots.label.saved" var="i18nSaved"/><c:set var="i18nSaved" value="${functions:escapeJavaScript(i18nSaved)}"/>
 
 
-<template:addResources type="javascript" resources="jquery.min.js,jquery.form.min.js"/>
+<template:addResources type="javascript" resources="jquery.min.js"/>
 <template:addResources>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#updateSiteRobotsForm').submit(function () {
                 var updateSiteRobotsSubmit = $('#updateSiteRobotsSubmit');
                 updateSiteRobotsSubmit.attr('disabled', 'disabled');
-                $(this).ajaxSubmit({
+                $(this).ajax({
+                    url: "${siteURL}",
+                    data: {
+                        mixins: {
+                            jmix_robots: {
+                                robots: $('#robotsString').val()
+                            }
+                        }
+                    },
+                    type: "PUT",
                     success: function (response) {
                         if (response.warn != undefined) {
                             alert(response.warn);
@@ -41,11 +51,8 @@
 <p><fmt:message key="robots.label.description"/>:</p>
 
 
-<form class="form-horizontal" id="updateSiteRobotsForm" action="<c:url value='${url.base}${site.path}'/>" method="post">
-    <input type="hidden" name="jcrMethodToCall" value="put"/>
-    <input type="hidden" name="jcr:mixinTypes" value="jmix:robots"/>
-
-    <div class="control-group">
+<form class="form-horizontal" id="updateSiteRobotsForm" action="#">
+<div class="control-group">
         <label class="control-label" for="robotsString"><fmt:message key='robots.label.robotsString'/></label>
 
         <div class="controls">

@@ -21,7 +21,7 @@
                     url: "${siteURL}",
                     data: {
                         mixins: {
-                            jmix_robots: {
+                            jmix__robots: {
                                 robots: $('#robotsString').val()
                             }
                         }

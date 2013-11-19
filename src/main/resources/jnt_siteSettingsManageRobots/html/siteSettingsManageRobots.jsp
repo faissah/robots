@@ -49,7 +49,7 @@
         <label class="control-label" for="robotsString"><fmt:message key='robots.label.robotsString'/></label>
 
         <div class="controls">
-            <textarea id="robotsString" name="robots" rows="7"><c:if test="${jcr:isNodeType(site, 'jmix:robots')}">${site.properties.robots.string}</c:if></textarea>
+            <textarea id="robotsString" name="j:robots" rows="7"><c:if test="${jcr:isNodeType(site, 'jmix:robots')}">${site.properties['j:robots'].string}</c:if></textarea>
         </div>
     </div>
     <div class="control-group">

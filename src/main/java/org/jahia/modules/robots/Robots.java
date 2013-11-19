@@ -46,6 +46,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletRequest;
 import java.util.List;
 
 /**
@@ -59,8 +60,11 @@ public class Robots {
     @RequestMapping(method = RequestMethod.GET, value = "/robots", produces = "text/plain")
     public
     @ResponseBody
-    String getRobots() throws Exception {
+    String getRobots(ServletRequest request) throws Exception {
         final List<JCRSiteNode> sites = siteService.getSitesNodeList();
+
+        // get the server name from the request
+        final String serverName = request.getServerName();
 
         // aggregate all sites robots configurations
         StringBuilder robots = new StringBuilder(255);
@@ -68,12 +72,17 @@ public class Robots {
 
             // only sites with the jmix:robots mixin interest us
             if (site.isNodeType("jmix:robots")) {
-                String siteRobots = site.getPropertyAsString("robots");
 
-                // process Disallow clauses
-                siteRobots = processDisallowClauses(siteRobots, site.getPath());
+                // next we only want sites that have the same server name property than the one that issued the request
+                final String siteServerName = site.getPropertyAsString("j:serverName");
+                if (serverName.equals(siteServerName)) {
+                    String siteRobots = site.getPropertyAsString("j:robots");
 
-                robots.append(siteRobots).append('\n');
+                    // process Disallow clauses
+                    siteRobots = processDisallowClauses(siteRobots, site.getPath());
+
+                    robots.append(siteRobots).append('\n');
+                }
             }
         }
 
@@ -81,11 +90,13 @@ public class Robots {
     }
 
     /**
-     * Process the Disallow clauses to add site path since we consider that users will configure their robots.txt relative to the site's root
+     * Process the Disallow clauses to add site path since we consider that users will configure their robots.txt
+     * relative to the site's root
      *
      * @param siteRobots the original robots configuration String
      * @param sitePath
-     * @return the processed robots configuration where Disallow clauses have been changed to be prefixed by the site path
+     * @return the processed robots configuration where Disallow clauses have been changed to be prefixed by the site
+     * path
      */
     static String processDisallowClauses(String siteRobots, String sitePath) {
         if (siteRobots != null) {

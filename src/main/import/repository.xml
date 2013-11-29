@@ -12,8 +12,8 @@
             <templates j:rootTemplatePath="/" jcr:primaryType="jnt:templatesFolder">
                 <files jcr:primaryType="jnt:folder"/>
                 <contents jcr:primaryType="jnt:contentFolder"/>
-                <siteSettingsBase j:view="siteSettings"
-                                  jcr:mixinTypes="jmix:useUILocale"
+                <site-settings-base j:view="siteSettings"
+                                    jcr:mixinTypes="jmix:useUILocale"
                                   jcr:primaryType="jnt:template">
                     <manageRobots j:applyOn="jnt:virtualsite"
                                   j:defaultTemplate="false"
@@ -27,7 +27,7 @@
                             <manage-robots jcr:primaryType="jnt:siteSettingsManageRobots"/>
                         </pagecontent>
                     </manageRobots>
-                </siteSettingsBase>
+                </site-settings-base>
             </templates>
         </robots>
     </modules>

@@ -48,6 +48,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletRequest;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @author Christophe Laprun
@@ -56,6 +57,7 @@ import java.util.List;
 public class Robots {
     private static final JahiaSitesService siteService = JahiaSitesService.getInstance();
     public static final String DISALLOW = "Disallow";
+    private static final Pattern LINE_SEPARATORS = Pattern.compile("\\r?\\n|\\r");
 
     @RequestMapping(method = RequestMethod.GET, value = "/robots", produces = "text/plain")
     public
@@ -113,7 +115,7 @@ public class Robots {
                     }
 
                     // per http://www.w3.org/TR/html4/appendix/notes.html#h-B.4.1.1, records are separated by blank lines
-                    final String[] split = siteRobots.split("\\r?\\n|\\r");
+                    final String[] split = LINE_SEPARATORS.split(siteRobots);
 
                     StringBuilder result = new StringBuilder(100 * split.length);
                     for (String s : split) {

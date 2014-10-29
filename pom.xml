@@ -8,7 +8,7 @@
         <version>7.0.0.0</version>
     </parent>
     <artifactId>robots</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <name>Robots.txt manager module</name>
     <description>A module to configure how search engines index sites via robots.txt</description>
